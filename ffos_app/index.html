@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link href="style/privategallery.css" rel="stylesheet" type="text/css">
+    <link href="style/animations.css" rel="stylesheet" type="text/css">
+    <link href="/shared/style/headers.css" rel="stylesheet" type="text/css">
+    <link href="/shared/style/progress_activity.css" rel="stylesheet" type="text/css">
+    <link href="/shared/style/toolbars.css" rel="stylesheet" type="text/css">
+    <link href="/shared/style/buttons.css" rel="stylesheet" type="text/css">
+    <link href="/shared/style/confirm.css" rel="stylesheet" type="text/css">
+    <link href="/shared/style/action_menu.css" rel="stylesheet" type="text/css">
+    <link href="style/icons/comms_icons.css" rel="stylesheet" type="text/css">
+    <link href="style/icons/action_icons.css" rel="stylesheet" type="text/css">
+    <link href="style/icons/media_icons.css" rel="stylesheet" type="text/css">
+
+
+    <script defer src="js/utils/async_storage.js"></script>
+    <script defer src="js/oauth.js"></script>
+    <script defer src="js/utils/action_menu.js"></script>
+    <script defer src="js/utils/confirm.js"></script>
+    <script defer src="js/utils/http_rest.js"></script>
+    <script defer src="js/viewer.js"></script>
+    <script defer src="js/uploader.js"></script>
+    <script defer src="js/main.js"></script>
+  </head>
+
+  <body>
+    <section class="empty opaque-trans">
+    <!-- Placeholder -->
+    </section>
+
+    <section id="upload" class="hide">
+      <form role="dialog" data-type="confirm">
+        <section>
+          <h1>Uploading media</h1>
+          <!-- Note: inline style only for demo purposes -->
+          <p style="text-align: center;"><progress></progress></p>
+        </section>
+        <menu><button type="button" class="full">Cancel</button></menu>
+      </form>
+    </section>
+
+    <section id="gallery-list" class="hide">
+      <section class="skin-dark" role="region">
+        <header>
+          <h1>Cloud Gallery</h1>
+        </header>
+      </section>
+      <section id="gallery-content">
+        <progress class="pack-activity" value="0" max="100"></progress>
+        <ul class="gallery">
+          <!-- here our gallery will be rendered -->
+        </ul>
+        <div role="toolbar">
+          <ul>
+            <li><button type="button" id="refresh" class="action-icon email-sync">sync</button></li>
+          </ul>
+          <ul>
+            <li><button type="button" id="add" class="media-icon gallery-editphoto">add</button></li>
+          </ul>
+          <ul>
+            <li><button type="button" id="logout" class="action-icon contacts">logout</button></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+
+    <section id="gallery-detail" class="hidden">
+      <section class="skin-dark" role="region">
+        <header>
+          <button id="back"><span class="icon icon-back">back</span></button>
+          <h1>Media</h1>
+        </header>
+      </section>
+      <section id="media-content">
+        <progress class="pack-activity" value="0" max="100"></progress>
+        <div id="img-container">
+        </div>
+        <div role="toolbar">
+          <ul>
+            <li><button type="button" id="delete" class="action-icon delete">delete</button></li>
+          </ul>
+          <ul>
+            <li><button type="button" id="share" class="action-icon email-share">Share</button></li>
+            <li><button type="button" id="send" class="comms-icon contacts-facebook">Send</button></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+
+    <form id="confirmation-message" class="hide" role="dialog" data-type="confirm">
+      <section>
+        <h1>Confirmation title</h1>
+        <p>Confirmation message</p>
+      </section>
+      <menu>
+        <button>Action 1</button>
+        <button>Action 2</button>
+      </menu>
+    </form>
+
+  </body>
+</html>

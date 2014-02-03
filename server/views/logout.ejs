@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+  </head>
+
+  <body>
+    <p>Token: <%= token %></p>
+    <script>
+      window.opener.postMessage({
+        type: 'ok',
+      }, '*');
+      window.close();
+    </script>
+  </body>
+</html>

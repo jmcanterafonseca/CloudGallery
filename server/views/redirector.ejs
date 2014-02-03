@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Redirector</title>
+  </head>
+
+  <body>
+    <p>Token: <%= token %></p>
+    <script>
+      window.opener.postMessage({
+        type: 'token',
+        data: '<%= token %>'
+      }, '*');
+
+      window.close();
+    </script>
+  </body>
+</html>

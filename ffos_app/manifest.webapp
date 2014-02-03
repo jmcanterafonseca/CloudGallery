@@ -1,0 +1,50 @@
+{
+  "name": "CloudGallery",
+  "description": "Cloud Gallery",
+  "type": "privileged",
+  "launch_path": "/index.html",
+  "developer": {
+    "name": "José Manuel Cantera",
+    "url": "mailto:jmcf@tid.es"
+  },
+  "permissions": {
+    "systemXHR": {},
+    "desktop-notification": {},
+    "push": {}
+  },
+  "activities": {
+    "pick": {
+      "filters": {
+        "type": ["image/*", "audio/*", "video/*"],
+        "self": "undefined"
+       },
+      "disposition": "window",
+      "returnValue": "true"
+    },
+    "share": {
+      "filters": {
+        "type": ["image/*", "audio/*", "video/*"],
+        "number": 1,
+        "self": "undefined"
+       },
+      "disposition": "window",
+      "returnValue": "false"
+    }
+  },
+  "messages": [
+    { "push": "/index.html"},
+    { "push-register": "/index.html"},
+    { "notification": "/index.html" }
+  ],
+  "locales": {
+    "en-US": {
+      "name": "CloudGallery",
+      "description": "Cloud Gallery. Use your FB account to store your media"
+    }
+  },
+  "default_locale": "en-US",
+  "icons": {
+    "120": "/style/icons/icon_120_.png",
+    "60": "/style/icons/icon_.png"
+  }
+}
