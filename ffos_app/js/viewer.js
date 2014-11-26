@@ -416,7 +416,8 @@ var Gallery = (function() {
 
   function doSendMediaFacebook(albumId, mediaId) {
     var uri = GALLERY_SERVER + '/upload_media_facebook' + '/' +
-    albumId + '/' + mediaId + '?access_token=' + access_token;
+    albumId + '/' + encodeURIComponent(mediaId) +
+    '?access_token=' + access_token;
 
     progressActivity.style.display = '';
     imgNode.style.opacity = 0.2;
