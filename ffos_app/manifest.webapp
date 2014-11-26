@@ -1,7 +1,7 @@
 {
   "name": "CloudGallery",
   "description": "Cloud Gallery",
-  "type": "privileged",
+  "type": "certified",
   "launch_path": "/index.html",
   "developer": {
     "name": "José Manuel Cantera",

@@ -1,8 +1,12 @@
+'use strict';
+
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
 var URL = require('url');
 var QueryString = require('querystring');
+
+var Rest = require('./http_rest');
 
 var privateKey  = fs.readFileSync('sslcert/private.key', 'utf8');
 var certificate = fs.readFileSync('sslcert/cacert.pem', 'utf8');
@@ -567,7 +571,8 @@ app.get('/logout', function(req, resp) {
 
   var logoutService = 'https://www.facebook.com/logout.php?';
   var params = [
-    'next' + '=' + encodeURIComponent('https://www.facebook.com/connect/login_success.html'),
+    'next' + '=' + encodeURIComponent(
+                        'https://www.facebook.com/connect/login_success.html'),
     'access_token' + '=' + access_token
   ];
 

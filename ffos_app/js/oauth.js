@@ -1,6 +1,6 @@
 var oauth = {
   _APP_ID: '1384349841816348',
-  _END_POINT: 'https://m.facebook.com/dialog/oauth/?',
+  _END_POINT: 'https://www.facebook.com/dialog/oauth/?',
   _REDIRECT_URI: 'http://5.255.150.180/redirection',
   _SCOPE: ['friends_about_me', 'user_photos', 'publish_stream'],
   _STATE: 'gallery',

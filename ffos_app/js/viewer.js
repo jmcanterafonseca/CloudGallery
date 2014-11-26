@@ -83,8 +83,8 @@ var Gallery = (function() {
     img.onload = onLoadImg;
     img.onerror = onLoadImg;
     li.appendChild(img);
-    img.src = MEDIA_URI + '/' + src + '?access_token=' + access_token +
-    '&th=1';
+    img.src = MEDIA_URI + '/' + encodeURIComponent(src) +
+              '?access_token=' + access_token + '&th=1';
 
     return li;
   }
@@ -229,7 +229,8 @@ var Gallery = (function() {
   }
 
   function getMediaUrl(media) {
-    return MEDIA_URI + '/' + media + '?access_token=' + access_token;
+    return MEDIA_URI + '/' + encodeURIComponent(media) +
+                                              '?access_token=' + access_token;
   }
 
   function deleteMedia(e) {
@@ -326,64 +327,31 @@ var Gallery = (function() {
   function logout() {
     progressActivityList.style.display = '';
 
-    // var REDIRECT_LOGOUT_URI = GALLERY_SERVER + '/' + 'logout_redirect';
-    var REDIRECT_LOGOUT_URI =
-                      'https://www.facebook.com/connect/login_success.html';
+    window.addEventListener('message', function logoutHandler(e) {
+      window.removeEventListener('message', logoutHandler);
+      if (e.data.type === 'ok') {
+        window.console.log('Logout service invoked successfully');
+        window.asyncStorage.removeItem('userData', function() {
+          unregisterPush(access_token, function() {
+            window.setTimeout(function() {
+              progressActivity.style.display = 'none';
+              clearGallery();
+              Gallery.start();
+            }, 1500);
+          });
+        });
+      }
+    });
+
+    var REDIRECT_LOGOUT_URI = 'http://5.255.150.180/logout_redirect/';
+
     var logoutService = 'https://www.facebook.com/logout.php?';
     var params = [
       'next' + '=' + encodeURIComponent(REDIRECT_LOGOUT_URI),
       'access_token' + '=' + access_token
     ];
 
-    var logoutParams = params.join('&');
-    var logoutUrl = logoutService + logoutParams;
-    window.console.log(logoutUrl);
-/*
-    window.addEventListener('message', function logoutHandler(e) {
-      window.removeEventListener('message', logoutHandler);
-      if (e.type === 'ok') {
-        window.console.log(result);
-        window.console.log('Logout service invoked successfully');
-        window.asyncStorage.removeItem('userData', function() {
-          unregisterPush(access_token, function() {
-            window.setTimeout(function() {
-              progressActivity.style.display = 'none';
-              clearGallery();
-              Gallery.start();
-            }, 1500);
-          });
-        });
-      }
-    });
-
-    window.open(logoutUrl); */
-
-    Rest.get(logoutUrl, {
-      success: function(result) {
-        window.console.log(result);
-        window.console.log('Logout service invoked successfully');
-        window.asyncStorage.removeItem('userData', function() {
-          unregisterPush(access_token, function() {
-            window.setTimeout(function() {
-              progressActivity.style.display = 'none';
-              clearGallery();
-              Gallery.start();
-            }, 1500);
-          });
-        });
-      },
-      error: function() {
-        alert('Error');
-        progressActivity.style.display = 'none';
-        console.log('Error while logging out');
-      },
-      timeout: function() {
-        progressActivity.style.display = 'none';
-        alert('Operation timeout');
-      }
-    },{
-        operationsTimeout: 20000
-    });
+    window.open(logoutService + params.join('&'), '', 'dialog');
   }
 
   function reload() {
